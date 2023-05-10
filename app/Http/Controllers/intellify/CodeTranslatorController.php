@@ -5,19 +5,19 @@ namespace App\Http\Controllers\intellify;
 use App\Http\Controllers\Controller;
 use App\Models\CodeResponse;
 use Illuminate\Http\Request;
-
 use OpenAI\Laravel\Facades\OpenAI;
 
-class CodeGeneratorController extends Controller
+
+class CodeTranslatorController extends Controller
 {
     public function index(){
-        return view('app.pages.code_generator');
+        return view('app.pages.code_translator');
     }
 
     public function store(Request $request){
         $result = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
-            'prompt' => $request->prompt,
+            'prompt' => "Translate this code from $request->from to $request->to: $request->prompt",
             'max_tokens' => 150,
         ]);
 

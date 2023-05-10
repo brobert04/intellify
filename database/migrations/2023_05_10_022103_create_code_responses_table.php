@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('code_responses', function (Blueprint $table) {
             $table->id();
-            $table->string('prompt')->nullable();
-            $table->string('response')->nullable();
+            $table->text('prompt')->nullable();
+            $table->text('response')->nullable();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('response_id')->nullable();           
+            $table->string('response_id')->nullable();      
+            $table->string('section')->nullable();     
             $table->timestamps();
         });
     }

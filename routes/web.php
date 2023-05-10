@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\intellify\CodeTranslatorController;
 use App\Http\Controllers\GoogleProviderController;
 use App\Http\Controllers\intellify\CodeGeneratorController;
 use App\Http\Controllers\intellify\HistoryController;
@@ -33,6 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::get('/code-generator', [CodeGeneratorController::class, 'index'])->name('code_generator.index');
     Route::post('/code-generator', [CodeGeneratorController::class, 'store'])->name('code_generator.store');
+
+    Route::get('/code-translator', [CodeTranslatorController::class, 'index'])->name('code_translator.index');
+    Route::post('/code-translator', [CodeTranslatorController::class, 'store'])->name('code_translator.store');
 });
 
 

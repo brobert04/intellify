@@ -17,7 +17,7 @@
                     <a href="#" class="nav-link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="color: rgba(100, 95, 136, 0.75);">
                       <a class="dropdown-item" href="{{ route('code_generator.index') }}" style="color: rgba(100, 95, 136, 0.75);">Code Generator</a>
-                      <a class="dropdown-item" href="#" style="color: rgba(100, 95, 136, 0.75);">Code Translator</a>
+                      <a class="dropdown-item" href="{{ route('code_translator.index') }}" style="color: rgba(100, 95, 136, 0.75);">Code Translator</a>
                       <a class="dropdown-item" href="#" style="color: rgba(100, 95, 136, 0.75);">Image Generator</a>
                       <a class="dropdown-item" href="#" style="color: rgba(100, 95, 136, 0.75);">Translator</a>
                       <a class="dropdown-item" href="#" style="color: rgba(100, 95, 136, 0.75);">Business Helper</a>

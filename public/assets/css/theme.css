@@ -1707,7 +1707,7 @@ a.text-dark:hover, a.text-dark:focus {
   display: block;
   margin: 0 auto;
   padding: 32px 20px 70px 20px;
-  max-width: 260px;
+  max-width: 360px;
   min-height: 270px;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(100, 95, 136, 0.16);
