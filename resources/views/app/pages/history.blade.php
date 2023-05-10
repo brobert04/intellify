@@ -56,6 +56,13 @@
                                 </div>
                             </div>
                         @endforeach
+                        <div class="col-12 mt-5">
+                            <nav aria-label="Page Navigation">
+                              <ul class="pagination justify-content-center">
+                                {{$responses->links()}}
+                              </ul>
+                            </nav>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -63,7 +70,5 @@
     </main>
 @endsection
 @section('custom-js')
-<script>
-    document.querySelector('')
-</script>
+
 @endsection

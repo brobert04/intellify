@@ -4,6 +4,7 @@ use App\Http\Controllers\intellify\CodeTranslatorController;
 use App\Http\Controllers\GoogleProviderController;
 use App\Http\Controllers\intellify\CodeGeneratorController;
 use App\Http\Controllers\intellify\HistoryController;
+use App\Http\Controllers\intellify\ImageGeneratorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -37,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::get('/code-translator', [CodeTranslatorController::class, 'index'])->name('code_translator.index');
     Route::post('/code-translator', [CodeTranslatorController::class, 'store'])->name('code_translator.store');
+
+    Route::get('/image-generator', [ImageGeneratorController::class, 'index'])->name('image_generator.index');
+    Route::post('/image-generator', [ImageGeneratorController::class, 'store'])->name('image_generator.store');
 });
 
 

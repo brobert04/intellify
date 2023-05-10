@@ -80,11 +80,10 @@
         <div class="page-section">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="title-section"><span class="marked">Code</span> Generator</h2>
+                    <h2 class="title-section"><span class="marked">Image</span> Generator</h2>
                     <div class="divider mx-auto"></div>
-                    <div class="subhead">Our AI model is at your disposal and helps you whenever you need. If you have any
-                        doubts about the code you wrote, or you simply don't know how to do a certain task, just ask it a
-                        question and it will help you.</div>
+                    <div class="subhead">Have you ever wanted your ideas to come true? Using our AI model, you can turn any
+                        idea or thought into a suggestive photo.</div>
                 </div>
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
@@ -98,17 +97,30 @@
                             </svg>
                         </button>
                     </div>
-                    <input class="form-control" id="prompt" name="prompt" placeholder="Enter your prompt...">
+                    <input class="form-control" id="prompt" name="prompt" placeholder="Enter your idea...">
                 </div>
                 <div class="form-group text-center mt-3">
                     <button type="button" class="btn btn-primary" id="btn">Generate</button>
                 </div>
-                <div class="browser-mockup">
+                {{-- <div class="browser-mockup">
                     <textarea class="form-control scroll" id="typed"
                         name="restypedult"style="border:none; position:absolute; top:0; left:0; right:0; bottom:0; resize:none;height: auto;"
                         readonly>
                     </textarea>
-                </div>
+                </div> --}}
+                <div class="page-section">
+                    <div class="container">
+                        <div class="text-center wow fadeInUp">
+                            <h2 class="title-section">Your<span class="marked"> Results</span></h2>
+                            <div class="divider mx-auto"></div>
+                        </div>
+                        <div class="row my-5 card-blog-row">
+                            <div class="col-md-6 col-lg-3 py-3 wow fadeInUp" id="result" style="align-items: center">
+
+                            </div>
+                        </div>
+                    </div> <!-- .container -->
+                </div> <!-- .page-section -->
             </div> <!-- .container -->
         </div>
     </main>
@@ -167,15 +179,27 @@
         })
         document.querySelector('#btn').addEventListener('click', () => {
             let txt = document.querySelector('#prompt').value;
-            document.querySelector("#typed").innerHTML = '';
             $.ajax({
                 type: 'POST',
-                url: '{{ route('code_generator.store') }}',
+                url: '{{ route('image_generator.store') }}',
                 data: {
                     prompt: txt
                 },
                 success: function(data) {
-                    displayResponse(data);
+                    var imageUrls = data.imageUrls;
+                    for (var i = 0; i < imageUrls.length; i++) {
+                        var img = $('<img>').css({
+                            width: '100%',
+                            height: '100%'
+                        });
+
+                        // Set the source of the image to the current URL
+                        img.attr('src', imageUrls[i]);
+
+                        // Append the image to the div with the id 'result'
+                        $('#result').append(img);
+                    }
+
                 }
             })
         });

@@ -11,7 +11,7 @@ class HistoryController extends Controller
     
     
     public function index(){
-        $responses = CodeResponse::where('user_id', auth()->user()->id)->get(); 
+        $responses = CodeResponse::where('user_id', auth()->user()->id)->paginate(6); 
         return view('app.pages.history', compact('responses'));
     }
 

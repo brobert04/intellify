@@ -28,7 +28,7 @@ class CodeTranslatorController extends Controller
         $code->response = $response;
         $code->user_id = auth()->user()->id;
         $code->response_id = $result->toArray()['id'];
-        $code->section = 'Code Generator';
+        $code->section = 'Code Translator';
         $code->save();
 
         return $response;

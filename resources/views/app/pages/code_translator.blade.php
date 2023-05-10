@@ -116,8 +116,9 @@
                     </select>
                 </div>
                 <div class="input-group mb-2">
-                    <textarea class="form-control" id="result" name="result" placeholder="Your translated code will appear here" rows="5"
-                        cols="30"></textarea>
+                        <textarea class="form-control scroll" id="typed" style="resize:none;height: 300px;"
+                        name="typed" readonly>
+                </textarea>
                 </div>
                 
             </div> <!-- .container -->
@@ -127,7 +128,7 @@
 
 @section('custom-js')
     <script>
-        var speed = 20;
+              var speed = 20;
 
         function typeWriter(txt, elem) {
             let i = 0;
@@ -143,7 +144,7 @@
         }
 
         function displayResponse(data) {
-            let elem = document.getElementById("result");
+            let elem = document.getElementById("typed");
             let formattedData = data.replace(/(?:\r\n|\r|\n)/g, '\n'); // replace newlines with <br> tags
             typeWriter(formattedData, elem);
         }
@@ -158,6 +159,7 @@
             let txt = document.querySelector('#prompt').value;
             let language = document.querySelector('#language').value;
             let translate_to = document.querySelector('#translate_to').value;
+            document.querySelector("#typed").innerHTML = '';
             $.ajax({
                 type: 'POST',
                 url: '{{ route('code_translator.store') }}',
@@ -167,8 +169,6 @@
                     to: translate_to
                 },
                 success: function(data) {
-                    let elem = document.getElementById("result");
-                    elem.innerHTML = '';
                     displayResponse(data);
                 }
             })
