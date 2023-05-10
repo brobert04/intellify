@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/usage-history', [HistoryController::class, 'index'])->name('history.index');
 
     Route::get('/code-generator', [CodeGeneratorController::class, 'index'])->name('code_generator.index');
+    Route::post('/code-generator', [CodeGeneratorController::class, 'store'])->name('code_generator.store');
 });
 
 

@@ -81,8 +81,7 @@
                         doubts about the code you wrote, or you simply don't know how to do a certain task, just ask it a
                         question and it will help you.</div>
                 </div>
-                <form action="#" class="mt-3">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <button id="convert" type="button" class="input-group-text" id="basic-addon1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -96,10 +95,9 @@
                         </div>
                         <input class="form-control" id="prompt" name="prompt" placeholder="Enter your prompt...">
                     </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary" id="btn">Button</button>
+                    <div class="form-group text-center mt-3">
+                        <button type="button" class="btn btn-primary" id="btn">Generate</button>
                     </div>
-                </form>
                 <div class="browser-mockup">
                     <p id="typed"></p>
                 </div>
@@ -111,6 +109,8 @@
 @section('custom-js')
     <script>
         document.querySelector('#convert').addEventListener('click', () => {
+            document.querySelector('#prompt').value = '';
+            document.querySelector("#typed").innerHTML = '';
             let speech = true;
             window.SpeechRecognition = window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
@@ -146,10 +146,31 @@
             type();
         }
 
+        function displayResponse(data) {
+            let elem = document.getElementById("typed");
+            let formattedData = data.replace(/(?:\r\n|\r|\n)/g, '\n'); // replace newlines with <br> tags
+            typeWriter(formattedData, elem);
+        }
+    </script>
+    <script>
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+            }
+        })
         document.querySelector('#btn').addEventListener('click', () => {
             let txt = document.querySelector('#prompt').value;
-            let elem = document.getElementById("typed");
-            typeWriter(txt, elem);
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('code_generator.store') }}',
+                data: {
+                    prompt: txt
+                },
+                success: function(data) {
+                    displayResponse(data);
+                }
+            })
         });
     </script>
 @endsection
