@@ -174,6 +174,7 @@
                 data: {
                     prompt: txt
                 },
+                // show a preloader
                 success: function(data) {
                     displayResponse(data);
                 }

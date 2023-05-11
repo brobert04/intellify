@@ -35,9 +35,9 @@
                         <div class="text-center wow fadeInUp">
                             <h2 class="title-section">Your<span class="marked"> Results</span></h2>
                             <div class="divider mx-auto"></div>
+                            <img src="{{ asset('../assets/img/preloader.gif') }}" alt="preloader" style="margin: 0 auto;display: none" id="preloader">
                         </div>
                         <div class="row my-5 card-blog-row" id="result">
-                            
                         </div>
                     </div> <!-- .container -->
                 </div> <!-- .page-section -->
@@ -106,14 +106,21 @@
                 data: {
                     prompt: txt
                 },
+                beforeSend: function() {
+                    $('#preloader').show();
+                },
+                complete: function() {
+                    $('#preloader').hide();
+                },
                 success: function(data) {
                     var imageUrls = data.imageUrls;
                     for (var i = 0; i < imageUrls.length; i++) {
                         var div = $('<div>').addClass('col-md-6 col-lg-3 py-3 wow fadeInUp');
                         var img = $('<img>').css({
                             width: '100%',
-                            height: '100%'
-                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                            height: '100%',
+                            boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+                            
                         });
                         div.append(img);
                         img.attr('src', imageUrls[i]);
