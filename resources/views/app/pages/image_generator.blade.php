@@ -30,12 +30,6 @@
                 <div class="form-group text-center mt-3">
                     <button type="button" class="btn btn-primary" id="btn">Generate</button>
                 </div>
-                {{-- <div class="browser-mockup">
-                    <textarea class="form-control scroll" id="typed"
-                        name="restypedult"style="border:none; position:absolute; top:0; left:0; right:0; bottom:0; resize:none;height: auto;"
-                        readonly>
-                    </textarea>
-                </div> --}}
                 <div class="page-section">
                     <div class="container">
                         <div class="text-center wow fadeInUp">
@@ -119,12 +113,10 @@
                         var img = $('<img>').css({
                             width: '100%',
                             height: '100%'
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                         });
                         div.append(img);
-                        // Set the source of the image to the current URL
                         img.attr('src', imageUrls[i]);
-
-                        // Append the image to the div with the id 'result'
                         $('#result').append(div);
                     }
 

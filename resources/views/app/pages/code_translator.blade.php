@@ -68,6 +68,9 @@
                 border-right-color: transparent;
             }
         }
+        .scroll::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 @endsection
 @section('content')
