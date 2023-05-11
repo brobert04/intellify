@@ -8,6 +8,7 @@ use App\Http\Controllers\intellify\ImageGeneratorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\intellify\ProductNameGeneratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::get('/image-generator', [ImageGeneratorController::class, 'index'])->name('image_generator.index');
     Route::post('/image-generator', [ImageGeneratorController::class, 'store'])->name('image_generator.store');
+
+    Route::get('product-name-generator', [ProductNameGeneratorController::class, 'index'])->name('product_name_generator.index');
+    Route::post('product-name-generator', [ProductNameGeneratorController::class, 'store'])->name('product_name_generator.store');
 });
 
 
