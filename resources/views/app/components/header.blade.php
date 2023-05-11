@@ -27,6 +27,10 @@
                                     style="color: rgba(100, 95, 136, 0.75);">Image Generator</a>
                                 <a class="dropdown-item" href="{{ route('product_name_generator.index') }}"
                                     style="color: rgba(100, 95, 136, 0.75);">Product Name Generator</a>
+                                <a class="dropdown-item" href="{{ route('translate.index') }}"
+                                    style="color: rgba(100, 95, 136, 0.75);">Translate</a>
+
+                                    
                             </div>
                         </div>
                     </li>

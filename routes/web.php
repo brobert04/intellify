@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\intellify\ProductNameGeneratorController;
+use App\Http\Controllers\intellify\TranslateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::get('product-name-generator', [ProductNameGeneratorController::class, 'index'])->name('product_name_generator.index');
     Route::post('product-name-generator', [ProductNameGeneratorController::class, 'store'])->name('product_name_generator.store');
+
+    Route::get('translate', [TranslateController::class, 'index'])->name('translate.index');
+    Route::post('translate', [TranslateController::class, 'store'])->name('translate.store');
 });
 
 
