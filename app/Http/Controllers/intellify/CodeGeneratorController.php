@@ -18,7 +18,7 @@ class CodeGeneratorController extends Controller
         $result = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => $request->prompt,
-            'max_tokens' => 150,
+            'max_tokens' => 200,
         ]);
 
         $response = array_reduce($result->toArray()['choices'], fn(string $result, array $choice) => $result . $choice['text'], "");

@@ -1,5 +1,13 @@
 @extends('app.index')
 @section('title', 'Intellify - Usage History')
+@section('custom-css')
+<style>
+     .scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+</style>
+@endsection
 @section('content')
     <main>
         <div class="container mt-5">
@@ -27,48 +35,74 @@
         @else
             <div class="page-section">
                 <div class="container">
-                    <div class="row">
-                        @foreach ($responses as $r)
-                            <div class="col-md-6 col-lg-4 py-3">
-                                <div class="card-blog">
-                                    <div class="header">
-                                        <div class="entry-footer">
-                                            <div class="post-author">{{ $r->section }}</div>
-                                            <a href="#"
-                                                class="post-date">{{ \Carbon\Carbon::parse($r->created_at)->format('d/m/Y') }}</a>
+                    <table class="table">
+                        <tbody>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Section</th>
+                                    <th scope="col">Prompt</th>
+                                    <th scope="col">Response</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+
+                            @foreach ($responses as $r)
+                                <tr>
+                                    <td>{{ $r->section }}</td>
+                                    <td
+                                        style="  max-width: 200px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;text-transform: capitalize">
+                                        {{ $r->prompt }}</td>
+                                    <td
+                                        style="  max-width: 200px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;">
+                                        {{ $r->response }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($r->created_at)->format('d/m/Y') }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModalCenter{{ $r->id }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                              </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter{{ $r->id }}" tabindex="-2"
+                                    role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">{{ $r->prompt }} <br> <span style="font-size: 15px; color:grey">{{ \Carbon\Carbon::parse($r->created_at)->format('d/m/Y') }}</span></h5>
+                                                <p></p>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <textarea class="modal-body scroll" style="height:300px;border: none;resize:none" readonly>
+                                                {{ $r->response }}
+                                            </textarea>
                                         </div>
                                     </div>
-                                    <div class="body">
-                                        <div class="post-title"><a href="blog-single.html"
-                                                style="text-transform: capitalize">{{ $r->prompt }}</a></div>
-                                        <div class="post-excerpt">{{ $r->response }}</div>
-                                    </div>
-                                    {{-- <div class="footer">
-                                        <a id="copy">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                                <path
-                                                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                            </svg></a>
-                                    </div> --}}
                                 </div>
-                            </div>
-                        @endforeach
-                        <div class="col-12 mt-5">
-                            <nav aria-label="Page Navigation">
-                              <ul class="pagination justify-content-center">
-                                {{$responses->links()}}
-                              </ul>
-                            </nav>
-                          </div>
-                    </div>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            {{ $responses->links() }}
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         @endif
-    </main>
-@endsection
-@section('custom-js')
 
-@endsection
+
+    @endsection
+    @section('custom-js')
+    @endsection
