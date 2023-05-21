@@ -86,7 +86,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <textarea class="modal-body scroll" style="height:300px;border: none;resize:none" readonly>
+                                            <textarea class="modal-body scroll" style="height:200px;border: none;resize:none" readonly>
                                                 {{ $r->response }}
                                             </textarea>
                                         </div>
